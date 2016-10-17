@@ -1,1 +1,2 @@
-# Immutable中文文档
+# Immutable.js中文文档
+

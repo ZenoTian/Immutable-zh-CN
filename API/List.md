@@ -94,7 +94,7 @@ size
 
 > pop(): List<T>
 
-###### DISCUSSION
+######## 讨论
 
 注意：这和 `Array#pop`不同， 因为返回的是新的List而不是被删除的值。 使用 `last()`能够获得List的最后一个值。
 
@@ -114,50 +114,80 @@ unshift(...values: T[]): List<T>
 shift(): List<T>
 ```
 
-###### DISCUSSION
+######## 讨论
 
 注意：和 `Array#shift`不同，因为返回的是新的List而不是被删除的值，使用`first()`能够获得List的第一个值。
 
-### update()
+##### update()
 
-Returns a new List with an updated value at `index` with the return value of calling`updater` with the existing value, or `notSetValue` if `index` was not set. If called with a single argument, `updater` is called with the List itself.
+返回一个新的List，当传入两个参数的时候，新的List的`index`的值被更新为`updater`的返回值，当前索引为`index`的值作为`updater`调用时的参数。如果只有一个参数，`updater`将会被List自身调用。
 
-```
-update(updater: (value: List<T>) => List<T>): List<T>
-update(index: number, updater: (value: T) => T): List<T>
-update(index: number, notSetValue: T, updater: (value: T) => T): List<T>
+> update(updater: (value: List<T>) => List<T>): List<T>
+>
+> update(index: number, updater: (value: T) => T): List<T>
+>
+> update(index: number, notSetValue: T, updater: (value: T) => T): List<T>
 
-```
-
-#### SEE
+###### 参考
 
 `Map#update`
 
-#### DISCUSSION
+###### 讨论
 
-`index` may be a negative number, which indexes back from the end of the List.`v.update(-1)` updates the last item in the List.
+`index`可能是负数,当时负数的时候表示从List的末尾开始。`v.update(-1)` 更新List中的最后一项.。
 
-### merge()
+##### merge()
 
-`merge(...iterables: Iterable.Indexed[]): Listmerge(...iterables: Array[]): List`SEE`Map#merge`
+>merge(...iterables: [Iterable.Indexed](https://facebook.github.io/immutable-js/docs/#/Iterable.Indexed)<T>[]): [List](https://facebook.github.io/immutable-js/docs/#/List)<T>
+>
+>merge(...iterables: Array<T>[]): [List](https://facebook.github.io/immutable-js/docs/#/List)<T>
 
-### mergeWith()
+###### 参考
 
-`mergeWith(merger: (previous?: T, next?: T, key?: number) => T,...iterables: Iterable.Indexed[]): List
-mergeWith(merger: (previous?: T, next?: T, key?: number) => T,...iterables: Array[]): List
-`SEE`Map#mergeWith`
+[Map#merge](https://facebook.github.io/immutable-js/docs/#/Map/merge)
 
-### mergeDeep()
+##### mergeWith()
 
-`mergeDeep(...iterables: Iterable.Indexed[]): ListmergeDeep(...iterables: Array[]): List`SEE`Map#mergeDeep`
+> mergeWith(merger: (previous?: T, next?: T, key?: number) => T,
+> ...iterables: [Iterable.Indexed](https://facebook.github.io/immutable-js/docs/#/Iterable.Indexed)<T>[]): [List](https://facebook.github.io/immutable-js/docs/#/List)<T>
+> mergeWith(merger: (previous?: T, next?: T, key?: number) => T,
+> ...iterables: Array<T>[]): [List](https://facebook.github.io/immutable-js/docs/#/List)<T>
 
-### mergeDeepWith()
+###### 参考
 
-`mergeDeepWith(merger: (previous?: T, next?: T, key?: number) => T,...iterables: Iterable.Indexed[]): List
-mergeDeepWith(merger: (previous?: T, next?: T, key?: number) => T,...iterables: Array[]): List
-`SEE`Map#mergeDeepWith`
+[Map#mergeWith](https://facebook.github.io/immutable-js/docs/#/Map/mergeWith)
 
-### setSize()
+##### mergeDeep()
+
+>mergeDeep(...iterables: [Iterable.Indexed](https://facebook.github.io/immutable-js/docs/#/Iterable.Indexed)<T>[]): [List](https://facebook.github.io/immutable-js/docs/#/List)<T>
+>
+>mergeDeep(...iterables: Array<T>[]): [List](https://facebook.github.io/immutable-js/docs/#/List)<T>
+
+###### 参考
+
+[Map#mergeDeep](https://facebook.github.io/immutable-js/docs/#/Map/mergeDeep)
+
+
+
+##### mergeDeepWith()
+
+> mergeDeepWith(merger: (previous?: T, next?: T, key?: number) => T,
+>
+> ...iterables: [Iterable.Indexed](https://facebook.github.io/immutable-js/docs/#/Iterable.Indexed)<T>[]): [List](https://facebook.github.io/immutable-js/docs/#/List)<T>
+>
+> mergeDeepWith(merger: (previous?: T, next?: T, key?: number) => T,
+>
+> ...iterables: Array<T>[]): [List](https://facebook.github.io/immutable-js/docs/#/List)<T>
+>
+> `mergeDeepWith(merger: (previous?: T, next?: T, key?: number) => T,...iterables: Iterable.Indexed[]): List
+
+###### 参考
+
+`Map#mergeDeepWith`
+
+##### setSize()
+
+返回一个大小为`size`的新的List。如果`size`比当前List的`size`小，新的List将会不包含
 
 Returns a new List with size `size`. If `size` is less than this List's size, the new List will exclude values at the higher indices. If `size` is greater than this List's size, the new List will have undefined values for the newly available indices.
 
@@ -166,7 +196,7 @@ setSize(size: number): List<T>
 
 ```
 
-#### DISCUSSION
+###### 讨论
 
 When building a new List and the final size is known up front, `setSize` used in conjunction with `withMutations` may result in the more performant construction.
 
@@ -182,7 +212,7 @@ setIn(keyPath: Iterable<any, any>, value: any): List<T>
 
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Index numbers are used as keys to determine the path to follow in the List.
 
@@ -235,7 +265,7 @@ withMutations(mutator: (mutable: List<T>) => any): List<T>
 
 ```
 
-#### SEE
+###### 参考
 
 `Map#withMutations`
 
@@ -279,7 +309,7 @@ toKeyedSeq(): Seq.Keyed<number, T>
 Iterable#toKeyedSeq
 ```
 
-#### DISCUSSION
+###### 讨论
 
 This is useful if you want to operate on an Iterable.Indexed and preserve the [index, value] pairs.
 
@@ -356,7 +386,7 @@ equals(other: Iterable<number, T>): boolean
 Iterable#equals
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Note: This is equivalent to `Immutable.is(this, other)`, but provided to allow for chained expressions.
 
@@ -375,7 +405,7 @@ hashCode(): number
 Iterable#hashCode
 ```
 
-#### DISCUSSION
+###### 讨论
 
 The `hashCode` of an Iterable is used to determine potential equality, and is used when adding this to a `Set` or as a key in a `Map`, enabling lookup via a different instance.
 
@@ -406,7 +436,7 @@ get(key: number, notSetValue?: T): T
 Iterable#get
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Note: it is possible a key may be associated with an `undefined` value, so if`notSetValue` is not provided and this method returns `undefined`, that does not guarantee the key was not found.
 
@@ -533,7 +563,7 @@ Iterable#toJS
 toJSON()
 ```
 
-#### DISCUSSION
+###### 讨论
 
 `Iterable.Indexeds`, and `Iterable.Sets` become Arrays, while `Iterable.Keyeds`become Objects.
 
@@ -567,7 +597,7 @@ toObject(): {[key: string]: V}
 Iterable#toObject
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Throws if keys are not strings.
 
@@ -588,7 +618,7 @@ toMap(): Map<number, T>
 Iterable#toMap
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Note: This is equivalent to `Map(this.toKeyedSeq())`, but provided for convenience and to allow for chained expressions.
 
@@ -607,7 +637,7 @@ toOrderedMap(): OrderedMap<number, T>
 Iterable#toOrderedMap
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Note: This is equivalent to `OrderedMap(this.toKeyedSeq())`, but provided for convenience and to allow for chained expressions.
 
@@ -626,7 +656,7 @@ toSet(): Set<T>
 Iterable#toSet
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Note: This is equivalent to `Set(this)`, but provided to allow for chained expressions.
 
@@ -645,7 +675,7 @@ toOrderedSet(): OrderedSet<T>
 Iterable#toOrderedSet
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Note: This is equivalent to `OrderedSet(this.valueSeq())`, but provided for convenience and to allow for chained expressions.
 
@@ -664,7 +694,7 @@ toList(): List<T>
 Iterable#toList
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Note: This is equivalent to `List(this)`, but provided to allow for chained expressions.
 
@@ -683,7 +713,7 @@ toStack(): Stack<T>
 Iterable#toStack
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Note: This is equivalent to `Stack(this)`, but provided to allow for chained expressions.
 
@@ -704,7 +734,7 @@ keys(): Iterator<number>
 Iterable#keys
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Note: this will return an ES6 iterator which does not support Immutable JS sequence algorithms. Use `keySeq` instead, if this is what you want.
 
@@ -723,7 +753,7 @@ values(): Iterator<T>
 Iterable#values
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Note: this will return an ES6 iterator which does not support Immutable JS sequence algorithms. Use `valueSeq` instead, if this is what you want.
 
@@ -742,7 +772,7 @@ entries(): Iterator<Array<any>>
 Iterable#entries
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Note: this will return an ES6 iterator which does not support Immutable JS sequence algorithms. Use `entrySeq` instead, if this is what you want.
 
@@ -888,7 +918,7 @@ sort(comparator?: (valueA: T, valueB: T) => number): Iterable<number, T>
 Iterable#sort
 ```
 
-#### DISCUSSION
+###### 讨论
 
 If a `comparator` is not provided, a default comparator uses `<` and `>`.
 
@@ -942,7 +972,7 @@ context?: any): Seq.Keyed<G, Iterable<number, T>>
 Iterable#groupBy
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Note: This is always an eager operation.
 
@@ -965,7 +995,7 @@ context?: any): number
 Iterable#forEach
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Unlike `Array#forEach`, if any call of `sideEffect` returns `false`, the iteration will stop. Returns the number of entries iterated (including the last iteration which returned false).
 
@@ -986,7 +1016,7 @@ slice(begin?: number, end?: number): Iterable<number, T>
 Iterable#slice
 ```
 
-#### DISCUSSION
+###### 讨论
 
 If begin is negative, it is offset from the end of the Iterable. e.g. `slice(-2)` returns a Iterable of the last two entries. If it is not provided the new Iterable will begin at the beginning of this Iterable.
 
@@ -1185,7 +1215,7 @@ concat(...valuesOrIterables: any[]): Iterable<number, T>
 Iterable#concat
 ```
 
-#### DISCUSSION
+###### 讨论
 
 For Seqs, all entries will be present in the resulting iterable, even if they have the same key.
 
@@ -1205,7 +1235,7 @@ flatten(shallow?: boolean): Iterable<any, any>
 Iterable#flatten
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Will deeply flatten the Iterable by default, returning an Iterable of the same type, but a`depth` can be provided in the form of a number or boolean (where true means to shallowly flatten one level). A depth of 0 (or shallow: false) will deeply flatten.
 
@@ -1236,7 +1266,7 @@ context?: any): Iterable<MK, MV>
 Iterable#flatMap
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Similar to `iter.map(...).flatten(true)`.
 
@@ -1270,7 +1300,7 @@ interleave(...iterables: Array<Iterable<any, T>>): Iterable.Indexed<T>
 Iterable.Indexed#interleave
 ```
 
-#### DISCUSSION
+###### 讨论
 
 The resulting Iterable includes the first item from each, then the second from each, etc.
 
@@ -1304,7 +1334,7 @@ splice(index: number, removeNum: number, ...values: any[]): Iterable.Indexed<T>
 Iterable.Indexed#splice
 ```
 
-#### DISCUSSION
+###### 讨论
 
 `index` may be a negative number, which indexes back from the end of the Iterable.`s.splice(-2)` splices after the second to last item.
 
@@ -1328,7 +1358,7 @@ zip(...iterables: Array<Iterable<any, any>>): Iterable.Indexed<any>
 Iterable.Indexed#zip
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Like `zipWith`, but using the default `zipper`: creating an `Array`.
 
@@ -1390,11 +1420,11 @@ context?: any): R
 Iterable#reduce
 ```
 
-#### SEE
+###### 参考
 
 `Array#reduce`.
 
-#### DISCUSSION
+###### 讨论
 
 If `initialReduction` is not provided, or is null, the first item in the Iterable will be used.
 
@@ -1420,7 +1450,7 @@ context?: any): R
 Iterable#reduceRight
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Note: Similar to this.reverse().reduce(), and provided for parity with`Array#reduceRight`.
 
@@ -1488,7 +1518,7 @@ isEmpty(): boolean
 Iterable#isEmpty
 ```
 
-#### DISCUSSION
+###### 讨论
 
 For some lazy `Seq`, `isEmpty` might need to iterate to determine emptiness. At most one iteration will occur.
 
@@ -1510,7 +1540,7 @@ context?: any): number
 Iterable#count
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Regardless of if this Iterable can describe its size lazily (some Seqs cannot), this method will always return the correct size. E.g. it evaluates a lazy `Seq` if necessary.
 
@@ -1533,7 +1563,7 @@ context?: any): Map<G, number>
 Iterable#countBy
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Note: This is not a lazy operation.
 
@@ -1575,7 +1605,7 @@ notSetValue?: T): T
 Iterable#findLast
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Note: `predicate` will be called for each entry in reverse.
 
@@ -1615,7 +1645,7 @@ notSetValue?: T): Array<any>
 Iterable#findLastEntry
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Note: `predicate` will be called for each entry in reverse.
 
@@ -1659,7 +1689,7 @@ context?: any): number
 Iterable#findLastKey
 ```
 
-#### DISCUSSION
+###### 讨论
 
 Note: `predicate` will be called for each entry in reverse.
 
@@ -1708,7 +1738,7 @@ max(comparator?: (valueA: T, valueB: T) => number): T
 Iterable#max
 ```
 
-#### DISCUSSION
+###### 讨论
 
 The `comparator` is used in the same way as `Iterable#sort`. If it is not provided, the default comparator is `>`.
 
@@ -1755,7 +1785,7 @@ min(comparator?: (valueA: T, valueB: T) => number): T
 Iterable#min
 ```
 
-#### DISCUSSION
+###### 讨论
 
 The `comparator` is used in the same way as `Iterable#sort`. If it is not provided, the default comparator is `<`.
 
